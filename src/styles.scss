@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+$oxford-blue: #101c41;
+$steel-blue: #427aa1;
+$alice-blue: #ebf2fa;
+$sea-green: #388659;
+$red-cryola: #f3164e;
+$sunray: #dda448;
+
+$theme-colors: (
+  "primary": $steel-blue,
+  "secondary": $sunray,
+  "success": $sea-green,
+  "info": $steel-blue,
+  "warning": $sunray,
+  "danger": $red-cryola,
+  "light": $alice-blue,
+  "dark": $oxford-blue,
+);
+
+$body-bg: $oxford-blue;
+$body-color: $alice-blue;
+$body-text-align: center;
+
+$color-contrast-dark: $oxford-blue;
+$color-contrast-light: $alice-blue;
+
+@import "/node_modules/bootstrap/scss/bootstrap";
