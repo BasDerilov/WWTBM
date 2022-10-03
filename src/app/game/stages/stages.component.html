@@ -1,5 +1,15 @@
-<div class="d-flex flex-column px-3">
-  <div class="bg-primary border border-secondary rounded">
-    <p>stage</p>
+<div class="row row-cols-md-1">
+  <div
+    class="bg-primary border border-secondary rounded mb-1 fs-5"
+    *ngFor="let stage of stages"
+    [ngClass]="{
+      'bg-secondary ':
+        stage === currentStage ||
+        stages.indexOf(stage) % 5 === 0 ||
+        stage === 100,
+      'bg-dark border-3': stage === currentStage
+    }"
+  >
+    <p class="my-2">$ {{ stage }}</p>
   </div>
 </div>

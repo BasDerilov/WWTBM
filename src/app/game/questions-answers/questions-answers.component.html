@@ -1,51 +1,91 @@
 <div class="col">
-  <div class="row mb-3">
-    <div class="bg-primary border border-secondary p-5 rounded">
-      <p>Lorem</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md">
-      <div class="d-grid">
-        <button
-          type="button"
-          class="btn btn-lg border border-secondary btn-primary"
-        >
-          test
-        </button>
-      </div>
-    </div>
-    <div class="col-md">
-      <div class="d-grid">
-        <button
-          type="button"
-          class="btn btn-lg border border-secondary btn-primary"
-        >
-          test
-        </button>
+  <div class="row-lg mb-3">
+    <div class="bg-dark border border-secondary p-3 rounded">
+      <p
+        class="fs-4 fs-bold m-0"
+        *ngIf="!isLoading"
+        [innerHtml]="question?.question"
+      ></p>
+      <div
+        *ngIf="isLoading"
+        class="spinner-border text-secondary"
+        role="status"
+      >
+        <span class="visually-hidden">Loading...</span>
       </div>
     </div>
   </div>
-  <div class="row mt-3">
-    <div class="col-md">
+  <div class="row row-cols-xl-2">
+    <div class="my-2" *ngFor="let answer of question?.answers; index as i">
       <div class="d-grid">
         <button
           type="button"
           class="btn btn-lg border border-secondary btn-primary"
-        >
-          Button
-        </button>
-      </div>
-    </div>
-    <div class="col-md">
-      <div class="d-grid">
-        <button
-          type="button"
-          class="btn btn-lg border border-secondary btn-primary"
-        >
-          Button
-        </button>
+          [innerHTML]="letters[i] + ': ' + answer"
+          (click)="onGuess(i)"
+          [disabled]="buttonsEnabled ? !buttonsEnabled[i] : false"
+        ></button>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #gameOverModal>
+  <div class="bg-primary text-light">
+    <div class="modal-header">
+      <button
+        type="button"
+        class="btn-close close pull-right"
+        aria-label="Close"
+        (click)="modalRef?.hide()"
+      >
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body py-5">
+      <div class="mb-2">
+        Wrong answer! You are leaving with ${{ lastSafeSum }}
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #congratsModal>
+  <div class="bg-primary text-light">
+    <div class="modal-header">
+      <button
+        type="button"
+        class="btn-close close pull-right"
+        aria-label="Close"
+        (click)="modalRef?.hide()"
+      >
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body py-5">
+      <div class="mb-2">
+        Congrats for reaching a safe sum of ${{ lastSafeSum }}
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #gameWonModal>
+  <div class="bg-primary text-light">
+    <div class="modal-header">
+      <button
+        type="button"
+        class="btn-close close pull-right"
+        aria-label="Close"
+        (click)="modalRef?.hide()"
+      >
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body py-5">
+      <div class="mb-2">
+        You won the game and the grand prize of $1,000,000!
+      </div>
+    </div>
+  </div>
+</ng-template>

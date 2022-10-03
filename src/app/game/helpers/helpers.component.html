@@ -1,16 +1,22 @@
 <div class="d-flex justify-content-center">
   <div class="btn-group">
     <button
+      [disabled]="!allowHints || !audienceHelp"
+      (click)="onAudienceHelp(audienceHelpModal)"
       type="button"
       class="btn border border-secondary btn-primary btn-lg"
     >
       <fa-icon class="fs-3" [icon]="audienceIcon"></fa-icon></button
     ><button
+      [disabled]="!allowHints || !helpFromFriend"
+      (click)="onHelpFromFriend(callFriendModal)"
       type="button"
       class="btn border border-secondary btn-primary btn-lg"
     >
       <fa-icon class="fs-3" [icon]="callFriendIcon"></fa-icon></button
     ><button
+      [disabled]="!allowHints || !fiftyFifty"
+      (click)="onFiftyFifty()"
       type="button"
       class="btn border border-secondary btn-primary btn-lg"
     >
@@ -18,3 +24,55 @@
     </button>
   </div>
 </div>
+
+<ng-template #audienceHelpModal>
+  <div class="bg-primary text-light">
+    <div class="modal-header">
+      <button
+        type="button"
+        class="btn-close close pull-right"
+        aria-label="Close"
+        (click)="modalRef?.hide()"
+      >
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body py-5">
+      <div class="mb-2">
+        <progressbar
+          type="warning"
+          [animate]="true"
+          [striped]="true"
+          [max]="100"
+          [value]="audienceBar"
+          class="progress fs-5"
+          style="height: 30px"
+        ></progressbar>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #callFriendModal>
+  <div class="bg-primary text-light">
+    <div class="modal-header">
+      <button
+        type="button"
+        class="btn-close close pull-right"
+        aria-label="Close"
+        (click)="modalRef?.hide()"
+      >
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body py-5">
+      <div class="mb-2">
+        I think you should go with answer
+        {{
+          letters[
+            currentQuestion!.answers!.indexOf(currentQuestion!.correctAnswer)
+          ]
+        }}: {{ currentQuestion!.correctAnswer }}
+      </div>
+    </div>
+  </div>
+</ng-template>

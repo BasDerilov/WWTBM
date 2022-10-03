@@ -1,9 +1,20 @@
-<div class="row vh-100 p-5">
-  <div class="col d-flex flex-column">
-    <app-helpers class="mb-auto"></app-helpers>
-    <app-questions-answers></app-questions-answers>
+<div *ngIf="isGameOngoing" class="row mt-3">
+  <div class="col mb-3">
+    <app-helpers class="mb-5 row"></app-helpers>
+
+    <app-questions-answers class="row"></app-questions-answers>
   </div>
-  <div class="col-3 d-flex flex-column">
+  <div class="col-md-3">
     <app-stages></app-stages>
   </div>
 </div>
+
+<ng-template #gameOverModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Game Over!</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">Wrong answer, better luck next time!</div>
+</ng-template>
