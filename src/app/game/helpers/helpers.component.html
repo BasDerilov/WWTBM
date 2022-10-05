@@ -71,7 +71,8 @@
           letters[
             currentQuestion!.answers!.indexOf(currentQuestion!.correctAnswer)
           ]
-        }}: {{ currentQuestion!.correctAnswer }}
+        }}:
+        <div [innerHTML]="currentQuestion!.correctAnswer"></div>
       </div>
     </div>
   </div>
